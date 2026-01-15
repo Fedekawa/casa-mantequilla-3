@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CASA MANTEQUILLA | Objetos Comestibles</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- SWISS STYLE THEME --- */
+        :root {
+            --swiss-red: #FF3B00;
+            --black: #000000;
+            --white: #FFFFFF;
+            --grid-line: #E0E0E0;
+            --font-main: 'Inter', sans-serif;
+            --container-max: 1600px;
+        }
+
+        /* --- RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            font-family: var(--font-main);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; cursor: pointer; }
+        
+        /* --- TYPOGRAPHY --- */
+        .h-mega {
+            font-size: clamp(4rem, 15vw, 16rem);
+            line-height: 0.8;
+            font-weight: 700;
+            letter-spacing: -0.06em;
+            text-transform: uppercase;
+            margin-left: -0.05em; /* Optical alignment */
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-weight: 500;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        p { font-size: 1.1rem; line-height: 1.4; color: #333; }
+
+        /* --- GRID SYSTEM (The Core of Swiss Style) --- */
+        .wrapper {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            border-left: 1px solid var(--grid-line);
+            border-right: 1px solid var(--grid-line);
+        }
+
+        .grid-row {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            border-bottom: 1px solid var(--grid-line);
+        }
+
+        .col-span-12 { grid-column: span 12; }
+        .col-span-8  { grid-column: span 8; }
+        .col-span-6  { grid-column: span 6; }
+        .col-span-4  { grid-column: span 4; }
+        .col-span-3  { grid-column: span 3; }
+
+        .cell {
+            padding: 2rem;
+            border-right: 1px solid var(--grid-line);
+            position: relative;
+            background: var(--white);
+            transition: background 0.3s;
+        }
+        
+        .cell:last-child { border-right: none; }
+
+        /* --- UI ELEMENTS --- */
+        .btn-swiss {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: var(--swiss-red);
+            color: var(--white);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            transition: background 0.2s, transform 0.2s;
+            border: none;
+        }
+        
+        .btn-swiss:hover {
+            background: var(--black);
+            padding-left: 2.5rem; 
+        }
+
+        .circle-badge {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: var(--swiss-red);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(-15deg);
+            z-index: 10;
+            top: -20px;
+            right: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* --- HERO --- */
+        .hero-section {
+            min-height: 80vh;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: saturate(1.1);
+        }
+
+        /* --- TICKER --- */
+        .ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+            background: var(--black);
+            color: var(--white);
+        }
+        .ticker {
+            display: inline-block;
+            padding: 1rem 0;
+            animation: ticker 15s linear infinite;
+        }
+        .ticker-item {
+            display: inline-block;
+            padding: 0 2rem;
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+
+        /* --- PRODUCT GRID --- */
+        .product-cell {
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 0;
+        }
+        
+        .p-image-container {
+            height: 350px;
+            width: 100%;
+            overflow: hidden;
+            border-bottom: 1px solid var(--grid-line);
+        }
+        
+        .p-image-container img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .product-cell:hover .p-image-container img {
+            transform: scale(1.05);
+        }
+
+        .p-info { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .col-span-8, .col-span-6, .col-span-4, .col-span-3 { grid-column: span 12; }
+            .h-mega { font-size: 5rem; }
+            .grid-row { display: flex; flex-direction: column; }
+            .cell { border-right: none; border-bottom: 1px solid var(--grid-line); }
+            .btn-swiss:hover { padding-left: 2rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        
+        <nav class="grid-row">
+            <div class="cell col-span-3">
+                <span class="label">Marca</span>
+                <div style="font-weight: 700; font-size: 1.2rem; letter-spacing: -0.05em;">CASA MANTEQUILLA®</div>
+            </div>
+            <div class="cell col-span-6" style="display: flex; align-items: center; justify-content: space-between;">
+                <span class="label">Ubicación: Armenia, Quindío</span>
+                <span class="label">Temp: 22°C</span>
+            </div>
+            <a href="https://instagram.com/casa_mantequilla" target="_blank" class="cell col-span-3" style="background: var(--black); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 600;">
+                @CASA_MANTEQUILLA
+            </a>
+        </nav>
+
+        <header class="grid-row hero-section">
+            <div class="cell col-span-8" style="display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 4rem;">
+                <div class="circle-badge">
+                    GRASA<br>BUTÍRICA<br>84%
+                </div>
+                <h1 class="h-mega">Mante<br>quilla.</h1>
+                <p style="max-width: 500px; margin-top: 2rem; font-size: 1.5rem; font-weight: 400;">
+                    Pastelería de alta precisión. <br>
+                    Sin margarina. Sin decoraciones vacías. <br>
+                    <span style="color: var(--swiss-red);">Densidad absoluta.</span>
+                </p>
+            </div>
+            <div class="cell col-span-4" style="padding: 0;">
+                <img src="https://images.unsplash.com/photo-1612203985729-70726954388c?q=80&w=800&auto=format&fit=crop" class="hero-image" alt="Estructura de Torta">
+            </div>
+        </header>
+
+        <div class="grid-row">
+            <div class="col-span-12 ticker-wrap">
+                <div class="ticker">
+                    SOLO LÁCTEOS REALES • ENVIOS LOCALES • PROCESOS MANUALES • SOLO LÁCTEOS REALES • ENVIOS LOCALES • PROCESOS MANUALES •
+                </div>
+            </div>
+        </div>
+
+        <section class="grid-row">
+            <div class="cell col-span-4">
+                <span class="label">Concepto 01</span>
+                <h2>Rechazo a lo esponjoso.</h2>
+            </div>
+            <div class="cell col-span-8">
+                <p style="font-size: 2rem; font-weight: 300; letter-spacing: -0.03em;">
+                    La pastelería industrial vende aire. Nosotros vendemos peso. Nuestras fórmulas utilizan mantequilla francesa de baja humedad para lograr una textura compacta, sedosa y persistente en el paladar.
+                </p>
+                <br>
+                <a href="https://wa.me/573164823795" style="border-bottom: 2px solid var(--swiss-red); font-weight: 600; padding-bottom: 2px;">Consultar Disponibilidad →</a>
+            </div>
+        </section>
+
+        <section id="shop">
+            <div class="grid-row">
+                <div class="cell col-span-12" style="background: #F9F9F9;">
+                    <span class="label">Inventario Actual</span>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <article class="cell col-span-4 product-cell">
+                    <div class="p-image-container">
+                        <img src="https://images.unsplash.com/photo-1543508282-6319a3e2621f?q=80&w=800&auto=format&fit=crop" alt="Cake">
+                    </div>
+                    <div class="p-info">
+                        <div>
+                            <span class="label">Ref: GBC-01</span>
+                            <h3>Golden Butter Cake</h3>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">Vainilla premium + Mantequilla avellana.</p>
+                        </div>
+                        <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: baseline;">
+                            <span style="font-weight: 700; font-size: 1.2rem;">$85.000</span>
+                            <a href="https://wa.me/573164823795?text=Pedido:%20Golden%20Cake" style="color: var(--swiss-red); font-weight: 600;">[ PEDIR ]</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="cell col-span-4 product-cell">
+                    <div class="p-image-container">
+                        <img src="https://images.unsplash.com/photo-1618923850107-d1a234d7a73a?q=80&w=800&auto=format&fit=crop" alt="Cookie">
+                    </div>
+                    <div class="p-info">
+                        <div>
+                            <span class="label">Ref: CHK-150</span>
+                            <h3>Chunky Cookie</h3>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">Peso neto: 150g. Chocolate 70%.</p>
+                        </div>
+                        <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: baseline;">
+                            <span style="font-weight: 700; font-size: 1.2rem;">$12.000</span>
+                            <a href="https://wa.me/573164823795?text=Pedido:%20Cookies" style="color: var(--swiss-red); font-weight: 600;">[ PEDIR ]</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="cell col-span-4 product-cell">
+                    <div class="p-image-container">
+                        <img src="https://images.unsplash.com/photo-1612185851722-fb9bf2034118?q=80&w=800&auto=format&fit=crop" alt="Brownie">
+                    </div>
+                    <div class="p-info">
+                        <div>
+                            <span class="label">Ref: BRW-06</span>
+                            <h3>Fudge Brownies</h3>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">Caja x6. Textura de trufa.</p>
+                        </div>
+                        <div style="margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: baseline;">
+                            <span style="font-weight: 700; font-size: 1.2rem;">$45.000</span>
+                            <a href="https://wa.me/573164823795?text=Pedido:%20Brownies" style="color: var(--swiss-red); font-weight: 600;">[ PEDIR ]</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="grid-row" style="background: var(--black); color: var(--white);">
+            <div class="cell col-span-6" style="background: transparent; border-color: #333; padding: 4rem;">
+                <h2 style="color: var(--white);">Sistema de Pedidos</h2>
+                <p style="margin-top: 1rem; color: #999;">
+                    Operamos bajo demanda para garantizar frescura. <br>
+                    Haga clic para abrir una línea directa en WhatsApp.
+                </p>
+            </div>
+            <div class="cell col-span-6" style="background: transparent; border-color: #333; display: flex; align-items: center; padding: 0;">
+                <a href="https://wa.me/573164823795" class="btn-swiss" style="height: 100%;">
+                    <span>Iniciar Transacción</span>
+                    <span>→</span>
+                </a>
+            </div>
+        </section>
+
+        <footer class="grid-row">
+            <div class="cell col-span-3">
+                <span class="label">Contacto</span>
+                <p style="font-size: 0.9rem;">+57 316 482 3795</p>
+            </div>
+            <div class="cell col-span-3">
+                <span class="label">Social</span>
+                <a href="https://instagram.com/casa_mantequilla" style="font-size: 0.9rem;">Instagram ↗</a>
+            </div>
+            <div class="cell col-span-6">
+                <span class="label">Legal</span>
+                <p style="font-size: 0.9rem; color: #999;">© 2024 Casa Mantequilla. Diseño Internacional.</p>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
